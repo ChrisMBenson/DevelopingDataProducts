@@ -1,0 +1,16 @@
+{
+    "contents" : "\n# This is the user-interface definition of a Shiny web application.\n# You can find out more about building applications with Shiny here:\n#\n# http://shiny.rstudio.com\n#\n\nlibrary(shiny)\n\nshinyUI(fluidPage(\n\n  # Application title\n  titlePanel(\"Car Manufacturers\"),\n\n  sidebarLayout(\n    sidebarPanel(\n      \n      selectInput(\"make\", \"Choose a make:\", \n                  choices = c(\"alfa-romero\",\"audi\",\"bmw\",\"chevrolet\",\"dodge\"\n                              ,\"honda\",\"isuzu\",\"jaguar\",\"mazda\",\"mercedes-benz\"\n                              ,\"mercury\",\"mitsubishi\",\"nissan\",\"peugot\",\"plymouth\"     \n                              ,\"porsche\",\"renault\",\"saab\",\"subaru\",\"toyota\"\n                              ,\"volkswagen\",\"volvo\" )),\n      selectInput(\"body_style\", \"Choose a body style:\", \n                  choices = c(\"convertible\",\"hardtop\",\"hatchback\",\"sedan\",\"wagon\")),\n      engine_size = 140\n      horsepower = 100\n      highway_mpg = 25\n      \n    ),\n\n    # Show a plot of the generated distribution\n    mainPanel(\n      plotOutput(\"distPlot\")\n    )\n  )\n))\n",
+    "created" : 1445470942667.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "386785645",
+    "id" : "7ADD5874",
+    "lastKnownWriteTime" : 1445472370,
+    "path" : "C:/Github/DevelopingDataProducts/CarPricePrediction/ui.R",
+    "project_path" : "ui.R",
+    "properties" : {
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}

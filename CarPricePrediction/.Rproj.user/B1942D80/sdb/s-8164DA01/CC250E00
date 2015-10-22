@@ -1,0 +1,16 @@
+{
+    "contents" : "dfCars <- read.csv(\"CarPricePrediction/data/Automobile.csv\", na.strings=\"?\")\n\ndfCars <- dfCars[-c(1,2)] \n\ndfCars <- dfCars[complete.cases(dfCars),]\n\nlevels(dfCars$make)\nlevels(dfCars$body_style)\n\ndev.new(width=10, height=8)\n\nmake = dfCars$make\nprice = dfCars$price\nplot(make, price, ylab=\"Price ($)\", xlab=\"Car Manufacturer\")\nabline(lm(price~make))\n\n\n\n# Multiple Linear Regression Example \nmod <- lm(price ~ make + body_style + engine_size + horsepower + highway_mpg, data=df)\nsummary(mod) # show results\n\n# Other useful functions \ncoefficients(mod) # model coefficients\nconfint(mod, level=0.95) # CIs for model parameters \nfitted(mod) # predicted values\nresiduals(mod) # residuals\nanova(mod) # anova table \nvcov(mod) # covariance matrix for model parameters \ninfluence(mod) # regression diagnostics\n\n\nlayout(matrix(c(1,2,3,4),2,2)) # optional 4 graphs/page \nplot(mod)\n\n\nmake = \"nissan\"\nbody_style = \"sedan\"\nengine_size = 140\nhorsepower = 100\nhighway_mpg = 25\n\nnewCar <- data.frame(make, body_style, engine_size, horsepower, highway_mpg) \n\npredict(mod, newCar, interval = \"prediction\")",
+    "created" : 1445471026853.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "882968024",
+    "id" : "CC250E00",
+    "lastKnownWriteTime" : 1445472267,
+    "path" : "C:/Github/DevelopingDataProducts/Automobile Multiple Linear Regression.R",
+    "project_path" : null,
+    "properties" : {
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}
