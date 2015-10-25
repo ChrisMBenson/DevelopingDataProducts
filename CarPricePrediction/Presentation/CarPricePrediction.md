@@ -1,6 +1,6 @@
 <style>
 .small-code pre code {
-  font-size: 1em;
+  font-size: 0.9em;
 }
 </style>
 
@@ -27,19 +27,14 @@ Using this dataset we build a linear regrssion model over several variables and 
 
 We used the following variables from the automobile dataset to create the prediction: Make, Body Style, Engine Size, Horsepower, and Highway MPG. this is demonstrated through the following shiny app: https://chrisbens.shinyapps.io/CarPricePrediction
 
-Exploratory Data (Make vs Price)
+A Bit of Exploratory Data Analysis
 ========================================================
 ![plot of chunk unnamed-chunk-1](CarPricePrediction-figure/unnamed-chunk-1-1.png) 
 
-The Model
+A Model for Prediction
 =======================================================
 class: small-code
-Below we show the variable and where the model is built. We then use the "anova" package to display the Variance Table.
-
-```r
-mod <- lm(price ~ make + body_style + engine_size + horsepower + highway_mpg, data=dfCars)
-summary(mod) # show results
-```
+<small>Below we show model and the variables used to predict price</small>
 
 ```
 
@@ -88,7 +83,7 @@ Residual standard error: 2189 on 165 degrees of freedom
 Multiple R-squared:  0.9371,	Adjusted R-squared:  0.9268 
 F-statistic: 91.01 on 27 and 165 DF,  p-value: < 2.2e-16
 ```
-From these results and the results on the next slide, this model has a pretty good fit over the data. A Residual standad error of 2189 and an Adjusted R^2 value is 0.93 provides for a good model. 
+<small>From these results and the results on the next slide, this model has a pretty good fit over the data. A Residual standad error of 2189 and an Adjusted R^2 value is 0.93 provides for a good model.</small> 
 
 
 Summary

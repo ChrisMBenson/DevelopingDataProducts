@@ -1,11 +1,12 @@
 <style>
 .small-code pre code {
-  font-size: 1em;
+  font-size: 0.9em;
 }
 </style>
 
 ```{r setup, include=FALSE}
 opts_chunk$set(dev = 'png')
+library(extrafont)
 dfCars <- read.csv("../data/Automobile.csv", na.strings="?")
 dfCars <- dfCars[-c(1,2)] 
 dfCars <- dfCars[complete.cases(dfCars),]
@@ -32,24 +33,24 @@ Using this dataset we build a linear regrssion model over several variables and 
 
 We used the following variables from the automobile dataset to create the prediction: Make, Body Style, Engine Size, Horsepower, and Highway MPG. this is demonstrated through the following shiny app: https://chrisbens.shinyapps.io/CarPricePrediction
 
-Exploratory Data (Make vs Price)
+A Bit of Exploratory Data Analysis
 ========================================================
-```{r, fig.width = 30, fig.height = 15, echo=FALSE}
+```{r, fig.width = 20, fig.height = 12, echo=FALSE}
 par(mar=c(7.1,4.1,4.1,2.1))
 make = dfCars$make
 price = dfCars$price
 plot(make, price, ylab="Price ($)", las=2, main="Make vs Price")
 ```
 
-The Model
+A Model for Prediction
 =======================================================
 class: small-code
-Below we show the variable and where the model is built. We then use the "anova" package to display the Variance Table.
-```{r, echo=TRUE, width=20, size="small"}
+<small>Below we show model and the variables used to predict price</small>
+```{r, echo=FALSE, width=20, size="small"}
 mod <- lm(price ~ make + body_style + engine_size + horsepower + highway_mpg, data=dfCars)
 summary(mod) # show results
 ```
-From these results and the results on the next slide, this model has a pretty good fit over the data. A Residual standad error of `r round(summary(mod)$sigma)` and an Adjusted R^2 value is `r round(summary(mod)$adj.r.squared, 2)` provides for a good model. 
+<small>From these results and the results on the next slide, this model has a pretty good fit over the data. A Residual standad error of `r round(summary(mod)$sigma)` and an Adjusted R^2 value is `r round(summary(mod)$adj.r.squared, 2)` provides for a good model.</small> 
 
 
 Summary

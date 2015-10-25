@@ -55,7 +55,7 @@ shinyUI(fluidPage(
                   tabPanel("Vehicle Summary Statistics", verbatimTextOutput("summary")),
                   tabPanel("Help", 
                             tags$p("Depending on the size of your screen you may need to scroll down to see the showcase data and help. A slide summary can be found in the below link:"), 
-                            tags$a(href = "https://archive.ics.uci.edu/ml/datasets/Automobile", "Click Here!")
+                            tags$a(href = "http://rpubs.com/ChrisMBenson/120766", "Click Here!")
                            )
             )
 ))))
