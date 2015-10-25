@@ -1,0 +1,74 @@
+<style>
+.small-code pre code {
+  font-size: 1em;
+}
+</style>
+
+```{r setup, include=FALSE}
+opts_chunk$set(dev = 'png')
+dfCars <- read.csv("../data/Automobile.csv", na.strings="?")
+dfCars <- dfCars[-c(1,2)] 
+dfCars <- dfCars[complete.cases(dfCars),]
+```
+CarPricePrediction
+========================================================
+author: Chris Benson
+date:   24/10/2015
+width:  1920
+height: 1080
+font-family: 'Helvetica'
+
+
+Introduction
+========================================================
+The data we are using comes from the UCI Automobile Data Set that can be found in this link http://archive.ics.uci.edu/ml/datasets/Automobile.
+
+Using this dataset we build a linear regrssion model over several variables and then predict the price of a car given these same variables. In order to achieve the outcome there were several steps:
+
+- Explatory Data Analysis
+- Clean the Data
+- Build the model
+- Run a prediction on the model 
+
+We used the following variables from the automobile dataset to create the prediction: Make, Body Style, Engine Size, Horsepower, and Highway MPG. this is demonstrated through the following shiny app: https://chrisbens.shinyapps.io/CarPricePrediction
+
+Exploratory Data (Make vs Price)
+========================================================
+```{r, fig.width = 30, fig.height = 15, echo=FALSE}
+par(mar=c(7.1,4.1,4.1,2.1))
+make = dfCars$make
+price = dfCars$price
+plot(make, price, ylab="Price ($)", las=2, main="Make vs Price")
+```
+
+The Model
+=======================================================
+class: small-code
+Below we show the variable and where the model is built. We then use the "anova" package to display the Variance Table.
+```{r, echo=TRUE, width=20, size="small"}
+mod <- lm(price ~ make + body_style + engine_size + horsepower + highway_mpg, data=dfCars)
+summary(mod) # show results
+```
+From these results and the results on the next slide, this model has a pretty good fit over the data. A Residual standad error of `r round(summary(mod)$sigma)` and an Adjusted R^2 value is `r round(summary(mod)$adj.r.squared, 2)` provides for a good model. 
+
+
+Summary
+=======================================================
+class: small-code
+If we run a predict command over the model using some new data, we get the following prediction
+```{r, echo=TRUE}
+make = "nissan"
+body_style = "sedan"
+engine_size = 140
+horsepower = 100
+highway_mpg = 25
+
+newCar <- data.frame(make, body_style, engine_size, horsepower, highway_mpg) 
+pred <- predict(mod, newCar, interval = "prediction")
+pred
+```
+The 95% prediction interval for the above variables puts the price of a `r paste(make, ' ', body_style, ' with an engine size of ', engine_size, ', horsepower of ', horsepower, ' and an average Highway MPG of ', highway_mpg)` between $`r round(pred[2])` and $`r as.integer(round(pred[3]))` with a fit of $`r as.integer(round(pred[1]))`.
+
+This can also be demonstrated through the use of the shiny application:  https://chrisbens.shinyapps.io/CarPricePrediction
+
+

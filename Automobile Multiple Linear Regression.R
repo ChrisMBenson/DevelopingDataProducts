@@ -5,15 +5,12 @@ dfCars <- dfCars[-c(1,2)]
 
 dfCars <- dfCars[complete.cases(dfCars),]
 
-levels(dfCars$make)
-levels(dfCars$body_style)
-
 dev.new(width=10, height=8)
 
 make = dfCars$make
 price = dfCars$price
 plot(make, price, ylab="Price ($)", xlab="Car Manufacturer")
-abline(lm(price~make))
+
 
 carVars <- c("make", "body_style", "engine_size", "horsepower", "highway_mpg", "price" )
 filter_dfCars <- dfCars[carVars, "audi"]
@@ -50,14 +47,6 @@ highway_mpg = 25
 newCar <- data.frame(make, body_style, engine_size, horsepower, highway_mpg) 
 
 pred <- predict(mod, newCar, interval = "prediction")
-
-tabPanel("Help and About", 
-         
-         p("The dataset comes from the UCI Machine Learning Repository and can be downloaded here: https://archive.ics.uci.edu/ml/datasets/Automobile."
-           "The application is fully reactive, reacting to a change in any of the input values. Initially default values are selected and a prediction is shown. Chaning any of the" 
-           "inputs will create a new prediction and filter out records where necessary.")
-         
-)
 
 
 
