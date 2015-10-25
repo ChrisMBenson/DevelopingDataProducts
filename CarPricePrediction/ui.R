@@ -10,7 +10,7 @@ library(shiny)
 shinyUI(fluidPage(
 
   # Application title
-  titlePanel("Car Manufacturers"),
+  titlePanel("Car Price Prediction"),
 
   sidebarLayout(
     sidebarPanel(
@@ -23,15 +23,39 @@ shinyUI(fluidPage(
                               ,"volkswagen","volvo" )),
       selectInput("body_style", "Choose a body style:", 
                   choices = c("convertible","hardtop","hatchback","sedan","wagon")),
-      engine_size = 140
-      horsepower = 100
-      highway_mpg = 25
+      
+      sliderInput("engine_size", "Engine Size:",
+                  min=60, max=330, value=128),
+      
+      sliderInput("horsepower", "Horsepower:",
+                  min=48, max=280, value=105),
+      
+      sliderInput("highway_mpg", "Highway MPG:",
+                  min=16, max=60, value=30)
+
       
     ),
 
-    # Show a plot of the generated distribution
+    # Show tabs
     mainPanel(
-      plotOutput("distPlot")
-    )
-  )
-))
+      
+      tabsetPanel(type = "tabs", 
+                  tabPanel("Prediction",
+                           h2("Predicted Value:"),
+                           h3(verbatimTextOutput("prediction")),
+                           h4("Selected Variables:"),
+                           tableOutput("selectedVariables"),
+                           h4("Filtered Make:"),
+                           tableOutput("filteredCars")       
+                           ), 
+                  tabPanel("Model Summary Statistics", 
+                           verbatimTextOutput("modelsummary")), 
+                  tabPanel("Make vs Price Plot", 
+                           plotOutput("distPlot")), 
+                  tabPanel("Vehicle Summary Statistics", verbatimTextOutput("summary")),
+                  tabPanel("Help", 
+                            tags$p("Depending on the size of your screen you may need to scroll down to see the showcase data and help. A slide summary can be found in the below link:"), 
+                            tags$a(href = "https://archive.ics.uci.edu/ml/datasets/Automobile", "Click Here!")
+                           )
+            )
+))))

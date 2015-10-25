@@ -1,0 +1,16 @@
+{
+    "contents" : "\n# This is the user-interface definition of a Shiny web application.\n# You can find out more about building applications with Shiny here:\n#\n# http://shiny.rstudio.com\n#\n\nlibrary(shiny)\n\nshinyUI(fluidPage(\n\n  # Application title\n  titlePanel(\"Car Price Prediction\"),\n\n  sidebarLayout(\n    sidebarPanel(\n      \n      selectInput(\"make\", \"Choose a make:\", \n                  choices = c(\"alfa-romero\",\"audi\",\"bmw\",\"chevrolet\",\"dodge\"\n                              ,\"honda\",\"isuzu\",\"jaguar\",\"mazda\",\"mercedes-benz\"\n                              ,\"mercury\",\"mitsubishi\",\"nissan\",\"peugot\",\"plymouth\"     \n                              ,\"porsche\",\"renault\",\"saab\",\"subaru\",\"toyota\"\n                              ,\"volkswagen\",\"volvo\" )),\n      selectInput(\"body_style\", \"Choose a body style:\", \n                  choices = c(\"convertible\",\"hardtop\",\"hatchback\",\"sedan\",\"wagon\")),\n      \n      sliderInput(\"engine_size\", \"Engine Size:\",\n                  min=60, max=330, value=128),\n      \n      sliderInput(\"horsepower\", \"Horsepower:\",\n                  min=48, max=280, value=105),\n      \n      sliderInput(\"highway_mpg\", \"Highway MPG:\",\n                  min=16, max=60, value=30)\n\n      \n    ),\n\n    # Show tabs\n    mainPanel(\n      \n      tabsetPanel(type = \"tabs\", \n                  tabPanel(\"Prediction\",\n                           h2(\"Predicted Value:\"),\n                           h3(verbatimTextOutput(\"prediction\")),\n                           h4(\"Selected Variables:\"),\n                           tableOutput(\"selectedVariables\"),\n                           h4(\"Filtered Make:\"),\n                           tableOutput(\"filteredCars\")       \n                           ), \n                  tabPanel(\"Model Summary Statistics\", \n                           verbatimTextOutput(\"modelsummary\")), \n                  tabPanel(\"Make vs Price Plot\", \n                           plotOutput(\"distPlot\")), \n                  tabPanel(\"Vehicle Summary Statistics\", verbatimTextOutput(\"summary\")),\n                  tabPanel(\"Help\", \n                            tags$p(\"Depending on the size of your screen you may need to scroll down to see the showcase data and help. A slide summary can be found in the below link:\"), \n                            tags$a(href = \"https://archive.ics.uci.edu/ml/datasets/Automobile\", \"Click Here!\")\n                           )\n            )\n))))\n",
+    "created" : 1445727148526.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1606233276",
+    "id" : "2F8217CC",
+    "lastKnownWriteTime" : 1445739678,
+    "path" : "~/R/DevelopingDataProducts/DevelopingDataProducts_GitHub/DevelopingDataProducts/CarPricePrediction/ui.R",
+    "project_path" : "ui.R",
+    "properties" : {
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}

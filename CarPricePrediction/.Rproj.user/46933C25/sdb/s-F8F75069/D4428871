@@ -1,0 +1,16 @@
+{
+    "contents" : "\n# This is the server logic for a Shiny web application.\n# You can find out more about building applications with Shiny here:\n#\n# http://shiny.rstudio.com\n#\n\nlibrary(shiny)\n\nshinyServer(function(input, output) {\n  \n  #read the the dataset into a dataframe\n  dfCars <- read.csv(\"data/Automobile.csv\", na.strings=\"?\")\n  \n  \n  #Data Cleanup\n  dfCars <- dfCars[-c(1,2)] \n  \n  dfCars <- dfCars[complete.cases(dfCars),]\n  \n  \n  smake = dfCars$make\n  sprice = dfCars$price\n\n  #Linear regression\n  mod <- lm(price ~ make + body_style + engine_size + horsepower + highway_mpg, data=dfCars)\n\n  \n  #inital prediction and subsequent predictions  \n  output$prediction <- renderPrint({\n  \n    make = input$make\n    body_style = input$body_style\n    engine_size = input$engine_size\n    horsepower = input$horsepower\n    highway_mpg = input$highway_mpg\n    \n    newCar <- data.frame(make, body_style, engine_size, horsepower, highway_mpg) \n    \n    predict(mod, newCar, interval = \"prediction\")\n    \n  })\n  \n  # Generate an HTML table view of the variables\n  output$selectedVariables <- renderTable({\n  \n    make = input$make\n    body_style = input$body_style\n    engine_size = input$engine_size\n    horsepower = input$horsepower\n    highway_mpg = input$highway_mpg\n    \n    newCar <- data.frame(make, body_style, engine_size, horsepower, highway_mpg) \n    data.frame(x=newCar)\n  })\n\n  # Generate an HTML table view of the data filtered by make\n  output$filteredCars <- renderTable({\n    \n    filter_dfCars <- subset(dfCars, make == input$make, select=c(\"make\", \"body_style\", \"engine_size\", \"horsepower\", \"highway_mpg\", \"price\"))\n    data.frame(x=filter_dfCars)\n    \n  })\n  \n  # Generate a summary of the data\n  output$modelsummary <- renderPrint({\n    summary(mod)\n  })\n\n  output$distPlot <- renderPlot({\n    # draw the plot of the data\n    plot(smake, sprice, ylab=\"Price ($)\", xlab=\"Car Manufacturer\")\n\n  })\n\n  # Generate a summary of the data\n  output$summary <- renderPrint({\n    summary(dfCars)\n  })\n  \n  # Generate an HTML table view of the data\n  output$table <- renderTable({\n    data.frame(x=dfCars)\n  })\n  \n  \n})\n",
+    "created" : 1445727143365.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1921376896",
+    "id" : "D4428871",
+    "lastKnownWriteTime" : 1445738184,
+    "path" : "~/R/DevelopingDataProducts/DevelopingDataProducts_GitHub/DevelopingDataProducts/CarPricePrediction/server.R",
+    "project_path" : "server.R",
+    "properties" : {
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}
